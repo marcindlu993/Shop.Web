@@ -1,0 +1,18 @@
+namespace Shop.Web.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class test06062017v2 : DbMigration
+    {
+        public override void Up()
+        {
+            DropColumn("dbo.Authors", "SecondNameAuthor");
+        }
+        
+        public override void Down()
+        {
+            AddColumn("dbo.Authors", "SecondNameAuthor", c => c.String());
+        }
+    }
+}

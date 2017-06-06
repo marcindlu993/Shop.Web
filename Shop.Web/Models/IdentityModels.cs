@@ -16,6 +16,10 @@ namespace Shop.Web.Models
             // Dodaj tutaj niestandardowe oświadczenia użytkownika
             return userIdentity;
         }
+        public DbSet<Resource> Resources { get; set; }
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<TypeResource> TypeResources { get; set; }
+        public DbSet<PublishingHouse> PublishingHouses { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -29,5 +33,9 @@ namespace Shop.Web.Models
         {
             return new ApplicationDbContext();
         }
+        public System.Data.Entity.DbSet<Shop.Web.Models.Resource> Resources { get; set; }
+        public System.Data.Entity.DbSet<Shop.Web.Models.Author> Authors { get; set; }
+        public System.Data.Entity.DbSet<Shop.Web.Models.TypeResource> TypeResources { get; set; }
+        public System.Data.Entity.DbSet<Shop.Web.Models.PublishingHouse> PublishingHouses { get; set; }
     }
 }

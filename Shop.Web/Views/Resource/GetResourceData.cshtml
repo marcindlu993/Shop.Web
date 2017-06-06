@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Shop.Web.Models.ResourceViewModel>
+
+
+    <tr class="active">
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NameOfAuthor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublishingHouseName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameOfAuthor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublishingHouseName)
+            </td>
+            <td>
+                @Html.ActionLink("do koszyka", "AddToBuy", new { id = item.IdResource })
+                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
+        </tr>
+    }

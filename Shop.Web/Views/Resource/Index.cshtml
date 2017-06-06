@@ -1,0 +1,34 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "Index";
+    AjaxOptions ajaxOpts = new AjaxOptions
+    {
+        UpdateTargetId = "tablebody"
+    };
+}
+
+<h4>Katalog książek</h4>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<div style="margin: 10px;">
+    <nav>
+        <ul class="nav nav-tabs nav-justified">
+            <li>
+                @Html.ActionLink("Wszystkie", "Index")
+            </li>
+            <li>
+                @Html.ActionLink("Audiobooki", "GetResourceData", new { category = 1 })
+            </li>
+            <li>
+                @Html.ActionLink("E-booki", "GetResourceData", new { category = 2 })
+            </li>
+        </ul>
+    </nav>
+    <table class="table table-bordered table-striped">
+        @Html.Action("GetResourceData", new { category = Model })
+    </table>
+
+</div>
