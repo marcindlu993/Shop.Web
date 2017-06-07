@@ -11,16 +11,16 @@ namespace Shop.Web.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Resource
-        //public ActionResult Index(int? category = null)
-        //{
-        //    return View();
-        //}
+        public ActionResult Index()
+        {
+            return View();
+        }
 
         public PartialViewResult GetResourceData(int? category = null)
         {
             IEnumerable<Resource> resourceslist = new List<Resource>();
 
-            if (category == null)
+            if (category == null)   
             {
                 resourceslist = db.Resources.OrderBy(x => x.Name).ToList();
             }
@@ -46,11 +46,10 @@ namespace Shop.Web.Controllers
             return PartialView(resourceViewModel);
         }
 
-        public ActionResult Index(int? category = null)
+        public ActionResult AddToCart(Resource item)
         {
-            return View((object)category);
+            return View(item);
         }
-
         // GET: Resource/Details/5
         public ActionResult Details(int id)
         {

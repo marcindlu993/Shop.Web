@@ -1,11 +1,9 @@
-﻿@model string
-
-@{
+﻿@{
     ViewBag.Title = "Index";
-    AjaxOptions ajaxOpts = new AjaxOptions
-    {
-        UpdateTargetId = "tablebody"
-    };
+    //AjaxOptions ajaxOpts = new AjaxOptions
+    //{
+    //    UpdateTargetId = "tablebody"
+    //};
 }
 
 <h4>Katalog książek</h4>
@@ -15,20 +13,29 @@
 </p>*@
 <div style="margin: 10px;">
     <nav>
+@using (Ajax.BeginForm(new AjaxOptions() { LoadingElementId = "loadingPanel", UpdateTargetId = "dataView", Url = Url.Action("GetResourceData") }))
+{
         <ul class="nav nav-tabs nav-justified">
             <li>
                 @Html.ActionLink("Wszystkie", "Index")
             </li>
             <li>
-                @Html.ActionLink("Audiobooki", "GetResourceData", new { category = 1 })
+                @Ajax.ActionLink("Data", "Index", new { category = 1 }, new AjaxOptions() { LoadingElementId = "loadingPanel", UpdateTargetId = "dataView" })
             </li>
             <li>
-                @Html.ActionLink("E-booki", "GetResourceData", new { category = 2 })
+                @Ajax.ActionLink("E-booki", "Index", new { category = 2 }, new AjaxOptions() { LoadingElementId = "loadingPanel", UpdateTargetId = "dataView" })
             </li>
         </ul>
+}
     </nav>
-    <table class="table table-bordered table-striped">
-        @Html.Action("GetResourceData", new { category = Model })
-    </table>
+    <div id="loadingPanel" style="display:none">
+        <p>Loading...</p>
+    </div>
+    <div id="dataView">
+        
+            @Html.Action("GetResourceData")
+        
+    </div>
 
+    @*@Ajax.ActionLink("Data","GetResourceData", new { category = 1 }, new AjaxOptions() { LoadingElementId="loadingPanel", UpdateTargetId = "dataView"})*@
 </div>

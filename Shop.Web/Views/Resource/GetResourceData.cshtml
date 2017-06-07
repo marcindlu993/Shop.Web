@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Shop.Web.Models.ResourceViewModel>
 
-
+<table class="table table-bordered table-striped">
     <tr class="active">
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -39,10 +39,11 @@
                 @Html.DisplayFor(modelItem => item.PublishingHouseName)
             </td>
             <td>
-                @Html.ActionLink("do koszyka", "AddToBuy", new { id = item.IdResource })
+                @Html.ActionLink("do koszyka", "AddToCart", new { id = item })
                 @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                     @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                     @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
             </td>
         </tr>
     }
+</table>
