@@ -1,41 +1,36 @@
 ﻿@{
     ViewBag.Title = "Index";
-    //AjaxOptions ajaxOpts = new AjaxOptions
-    //{
-    //    UpdateTargetId = "tablebody"
-    //};
 }
 
 <h4>Katalog książek</h4>
-
 @*<p>
     @Html.ActionLink("Create New", "Create")
 </p>*@
 <div style="margin: 10px;">
     <nav>
-@using (Ajax.BeginForm(new AjaxOptions() { LoadingElementId = "loadingPanel", UpdateTargetId = "dataView", Url = Url.Action("GetResourceData") }))
-{
         <ul class="nav nav-tabs nav-justified">
             <li>
-                @Html.ActionLink("Wszystkie", "Index")
+                @Ajax.ActionLink("Wszystkie", "GetResourceData", new AjaxOptions() { InsertionMode = InsertionMode.Replace, HttpMethod = "GET", LoadingElementId = "loadingPanel", UpdateTargetId = "dataView" })
             </li>
             <li>
-                @Ajax.ActionLink("Data", "Index", new { category = 1 }, new AjaxOptions() { LoadingElementId = "loadingPanel", UpdateTargetId = "dataView" })
+                @Ajax.ActionLink("Audiobooki", "GetResourceData", new { category = 1 }, new AjaxOptions() { InsertionMode = InsertionMode.Replace, HttpMethod = "GET", LoadingElementId = "loadingPanel", UpdateTargetId = "dataView" })
             </li>
             <li>
-                @Ajax.ActionLink("E-booki", "Index", new { category = 2 }, new AjaxOptions() { LoadingElementId = "loadingPanel", UpdateTargetId = "dataView" })
+                @Ajax.ActionLink("E-booki", "GetResourceData", new { category = 2 }, new AjaxOptions() { InsertionMode = InsertionMode.Replace, HttpMethod = "GET", LoadingElementId = "loadingPanel", UpdateTargetId = "dataView" })
             </li>
         </ul>
-}
     </nav>
     <div id="loadingPanel" style="display:none">
         <p>Loading...</p>
     </div>
     <div id="dataView">
-        
-            @Html.Action("GetResourceData")
-        
-    </div>
 
-    @*@Ajax.ActionLink("Data","GetResourceData", new { category = 1 }, new AjaxOptions() { LoadingElementId="loadingPanel", UpdateTargetId = "dataView"})*@
+    </div>
 </div>
+
+
+@section scripts{
+
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+
+}
