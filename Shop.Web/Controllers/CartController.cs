@@ -7,58 +7,56 @@ using System.Web.Mvc;
 
 namespace Shop.Web.Controllers
 {
-    public class ResourceController : Controller
+    public class CartController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        // GET: Resource
+
+        [HttpGet]
+        public PartialViewResult AddToCart(int? id)
+        {
+            Resource resource = db.Resources.Where(x => x.IdResource == id).FirstOrDefault();
+            AddToCartViewModel model = new AddToCartViewModel()
+            {
+                Name = resource.Name
+            };
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddToCart(AddToCartViewModel model)
+        {
+            return RedirectToAction("Index", "Resource");
+        }
+
+        private Cart GetCart()
+        {
+            Cart cart = (Cart)Session["Cart"];
+            if (cart == null)
+            {
+                cart = new Cart();
+                Session["Cart"] = cart;
+            }
+            return cart;
+        }
+        // GET: Cart
         public ActionResult Index()
         {
             return View();
         }
 
-        public PartialViewResult GetResourceData(int? category = null)
-        {
-            IEnumerable<Resource> resourceslist = new List<Resource>();
-
-            if (category == null)   
-            {
-                resourceslist = db.Resources.OrderBy(x => x.Name).ToList();
-            }
-            else
-            {
-                resourceslist = db.Resources.Where(x => x.IdTypeResource == category).OrderBy(x => x.Name).ToList();
-            }
-
-            var resourceViewModel = new List<ResourceViewModel>();
-            foreach (var item in resourceslist)
-            {
-                resourceViewModel.Add(new ResourceViewModel
-                {
-                    IdResource = item.IdResource,
-                    Name = item.Name,
-                    ReleaseDate = item.ReleaseDate,
-                    Price = item.Price,
-                    NameOfAuthor = db.Authors.Where(x => x.IdAuthor == item.IdAuthor).FirstOrDefault().NameAuthor,
-                    PublishingHouseName = db.PublishingHouses.Where(x => x.IdPublishingHouse == item.IdPublishingHouse).FirstOrDefault().NamePublishingHouse
-                });
-            }
-
-            return PartialView(resourceViewModel);
-        }
-
-        // GET: Resource/Details/5
+        // GET: Cart/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Resource/Create
+        // GET: Cart/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Resource/Create
+        // POST: Cart/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -74,13 +72,13 @@ namespace Shop.Web.Controllers
             }
         }
 
-        // GET: Resource/Edit/5
+        // GET: Cart/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Resource/Edit/5
+        // POST: Cart/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -96,13 +94,13 @@ namespace Shop.Web.Controllers
             }
         }
 
-        // GET: Resource/Delete/5
+        // GET: Cart/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Resource/Delete/5
+        // POST: Cart/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

@@ -7,12 +7,9 @@ using System.Web;
 
 namespace Shop.Web.Models
 {
-    public class CartViewModels
-    {
         public class AddToCartViewModel
         {
             [DisplayName("Tytuł")]
-            [ReadOnly(true)]
             public string Name { get; set; }
             [DisplayName("Nośnik")]
             public string MediaType { get; set; }
@@ -32,5 +29,4 @@ namespace Shop.Web.Models
             [DisplayName("Cena")]
             public decimal Price { get; set; }
         }
-    }
 }

@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Shop.Web.Models.ResourceViewModel>
 
+<div id="dataViewAddToCart" style="position:absolute; background-color: white; width:auto;"></div>
 <table class="table table-bordered table-striped">
     <tr class="active">
         <th>
@@ -39,7 +40,13 @@
                 @Html.DisplayFor(modelItem => item.PublishingHouseName)
             </td>
             <td>
-                @Html.ActionLink("do koszyka", "AddToCart", new { id = item })
+                @Ajax.ActionLink("do koszyka", "AddToCart", "Cart", new { id = item.IdResource },
+                    new AjaxOptions() {
+                        InsertionMode = InsertionMode.Replace,
+                        HttpMethod = "GET",
+                        LoadingElementId = "loadingPanel",
+                        UpdateTargetId = "dataViewAddToCart" })
+                @*@Html.ActionLink("do koszyka", "AddToCart", new { id = item.IdResource })*@
                 @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                     @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                     @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
