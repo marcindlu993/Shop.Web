@@ -23,9 +23,15 @@ namespace Shop.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddToCart(AddToCartViewModel model)
+        [ValidateAntiForgeryToken]
+        public ActionResult AddToCart([Bind( Include = "Id,Name,MediaType,Quantity")] AddToCartViewModel model)
         {
-            return RedirectToAction("Index", "Resource");
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Index","Resource", 1);
+            }
+            else
+                return View(model);
         }
 
         private Cart GetCart()

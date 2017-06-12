@@ -9,6 +9,7 @@ namespace Shop.Web.Models
 {
         public class AddToCartViewModel
         {
+            public int Id { get; set; }
             [DisplayName("Tytuł")]
             public string Name { get; set; }
             [DisplayName("Nośnik")]

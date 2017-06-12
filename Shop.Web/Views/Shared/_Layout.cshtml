@@ -12,41 +12,7 @@
 
 </head>
 <body>
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-
-            <div class="navbar-header">
-
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Nazwa aplikacji", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Strona główna", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Informacje", "About", "Home")</li>
-                    <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>*@
-    <div class="row" style="width:77%; margin:auto;">
-        <div class="col-md-6" style="height:90px;">
-            <h3>Księgarnia internetowa</h3>
-            <h5>Nasze sklepy prowadzimy z pasją!</h5>
-        </div>
-
-        <div class="col-md-6" style="margin:auto; height: 90px;">
-            <div style="float:right; margin-top: 30px;">
-                <div style="float:right;">Twój koszyk</div>
-                <div style="border:solid 1px;   ">Liczba produktów:</div>
-            </div>
-        </div>
-    </div>
+    @Html.Partial("_TopBar")
     <hr>
     <div class="container body-content">
         @RenderBody()

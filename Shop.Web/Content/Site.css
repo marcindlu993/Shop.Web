@@ -35,3 +35,19 @@ textarea {
 hr {
     margin: 2px 0px;
 }
+
+.right-inner-addon {
+    position: relative;
+    float: right;
+}
+
+    .right-inner-addon input {
+        padding-right: 30px;
+    }
+
+    .right-inner-addon i {
+        position: absolute;
+        left: 0px;
+        padding: 10px 12px;
+        pointer-events: none;
+    }
