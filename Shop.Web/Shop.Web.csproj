@@ -220,6 +220,10 @@
     <Compile Include="Migrations\201706061323301_test06062017v2.Designer.cs">
       <DependentUpon>201706061323301_test06062017v2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706130821255_UpdateResourceModel.cs" />
+    <Compile Include="Migrations\201706130821255_UpdateResourceModel.Designer.cs">
+      <DependentUpon>201706130821255_UpdateResourceModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CartModels.cs" />
@@ -331,6 +335,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706061323301_test06062017v2.resx">
       <DependentUpon>201706061323301_test06062017v2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706130821255_UpdateResourceModel.resx">
+      <DependentUpon>201706130821255_UpdateResourceModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -20,7 +20,23 @@ namespace Shop.Web.Controllers
         {
             IEnumerable<Resource> resourceslist = new List<Resource>();
 
-            if (category == null)   
+            if (category == 3) //pobranie nowości
+            {
+                DateTime date = DateTime.Now.AddDays(-14);
+                DateTime nowTime = DateTime.Now; 
+                resourceslist = db.Resources.Where(x => x.ReleaseDate > date && x.ReleaseDate < nowTime).OrderBy(x => x.Name).ToList();
+            }
+            else if (category == 4) //pobranie zapowiedzi
+            {
+                DateTime date = DateTime.Now.AddDays(14);
+                DateTime nowTime = DateTime.Now;
+                resourceslist = db.Resources.Where(x => x.ReleaseDate < date && x.ReleaseDate > nowTime).OrderBy(x => x.Name).ToList();
+            }
+            else if (category == 5) //pobranie okazji
+            {
+                resourceslist = db.Resources.Where(x => x.SuperBargain == true).OrderBy(x => x.Name).ToList();
+            }
+            else if (category == null)   
             {
                 resourceslist = db.Resources.OrderBy(x => x.Name).ToList();
             }

@@ -8,7 +8,7 @@
 </p>*@
 <div style="margin: 10px;">
     <nav>
-        <ul class="nav nav-tabs nav-justified">
+        <ul class="nav nav-tabs nav-justified navMyAjax">
             <li>
                 @Ajax.ActionLink("Wszystkie", "GetResourceData", new AjaxOptions() { InsertionMode = InsertionMode.Replace, HttpMethod = "GET", LoadingElementId = "loadingPanel", UpdateTargetId = "dataView" })
             </li>
@@ -17,6 +17,15 @@
             </li>
             <li>
                 @Ajax.ActionLink("E-booki", "GetResourceData", new { category = 2 }, new AjaxOptions() { InsertionMode = InsertionMode.Replace, HttpMethod = "GET", LoadingElementId = "loadingPanel", UpdateTargetId = "dataView" })
+            </li>
+            <li>
+                @Ajax.ActionLink("Nowości", "GetResourceData", new { category = 3 }, new AjaxOptions() { InsertionMode = InsertionMode.Replace, HttpMethod = "GET", LoadingElementId = "loadingPanel", UpdateTargetId = "dataView" })
+            </li>
+            <li>
+                @Ajax.ActionLink("Zapowiedzi", "GetResourceData", new { category = 4 }, new AjaxOptions() { InsertionMode = InsertionMode.Replace, HttpMethod = "GET", LoadingElementId = "loadingPanel", UpdateTargetId = "dataView" })
+            </li>
+            <li>
+                @Ajax.ActionLink("Super okazje", "GetResourceData", new { category = 5 }, new AjaxOptions() { InsertionMode = InsertionMode.Replace, HttpMethod = "GET", LoadingElementId = "loadingPanel", UpdateTargetId = "dataView" })
             </li>
         </ul>
     </nav>

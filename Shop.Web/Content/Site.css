@@ -51,3 +51,18 @@ hr {
         padding: 10px 12px;
         pointer-events: none;
     }
+.navMyAjax li{
+    border: solid 1px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+.navMyAjax li a:hover {
+    border: solid 1px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+    .navMyAjax li a:focus {
+        border: solid 1px;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }

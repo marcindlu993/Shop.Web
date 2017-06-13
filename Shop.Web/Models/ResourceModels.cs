@@ -23,6 +23,10 @@ namespace Shop.Web.Models
         public Author Author { get; set; }
         public PublishingHouse PublishingHouse { get; set; }
         public TypeResource TypeResource { get; set; }
+        /*TypeResource:
+         * 1 - Audiobooki, 2 - E-booki
+         * */
+        public bool SuperBargain { get; set; }
     }
 
     public class Author
