@@ -10,19 +10,25 @@
         <div class="form-group" style="padding-top:15px">
             <div class="text-center"><h3>Dodano pomyślnie do koszyka</h3></div>
             <div class="text-center">
-                <input type="button" value="Ok" onclick="javascript:doIt('dataViewAddToCart')" class="btn btn-default" />
+                <input type="button" value="Ok" onclick="javascript: doIt('dataViewAddToCart'); javascript:counterRes('counterResources')" class="btn btn-default" />
             </div>
         </div>
-
     </div>
 
 </div>
 
 <script type="text/javascript">
-    function doIt(dataViewAddToCart) {
+    function doIt(dataViewAddToCart)
+    {
         var dataViewAddToCart;
         document.getElementById(dataViewAddToCart).innerHTML = "";
     }
-
+    function counterRes(counterResources)
+    {
+            var counterResVar = @ViewBag.CounterStruke;
+            if (counterResVar == null)
+                counterResVar = 0;
+            document.getElementById(counterResources).innerHTML = '@ViewBag.CounterStruke';
+    }
 </script>
 

@@ -79,7 +79,7 @@ a.closeX {
     font-size: 16px;
     font-weight: bold;
 }
-a.closeX:hover{
+a.closeX:hover {
     text-emphasis:none;
 }
 
@@ -89,4 +89,7 @@ a.closeX:hover{
     opacity:0.3;
 }
 
-
+#sumValue {
+    text-align: right;
+    margin-right: 10px; 
+}

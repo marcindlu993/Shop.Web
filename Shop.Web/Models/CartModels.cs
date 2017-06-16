@@ -33,6 +33,11 @@ namespace Shop.Web.Models
         {
             get { return cartPositions; }
         }
+
+        public int CounterResources()
+        {
+            return cartPositions.Sum(e => e.Quantity);
+        }
         
     }
 

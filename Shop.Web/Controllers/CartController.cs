@@ -35,6 +35,7 @@ namespace Shop.Web.Controllers
                     return PartialView(model);
                 }
                 cartUser.AddItem(resource, model.Quantity, model.MediaType);
+                ViewBag.CounterStruke = cartUser.CounterResources();
                 return PartialView("DoneAddToCart");
             }
             else
@@ -49,6 +50,7 @@ namespace Shop.Web.Controllers
             {
                 myCart.Add(new MyCartViewModel() { Name = item.Resource.Name, Media = item.Media, Quantity = item.Quantity, Price = item.Resource.Price });
             }
+            ViewBag.SumValue = cartUser.SumValue();
             return PartialView(myCart);
         }
 
