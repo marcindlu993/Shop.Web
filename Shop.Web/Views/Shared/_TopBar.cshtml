@@ -22,7 +22,7 @@
 
     <div class="col-md-2" style="margin:auto; height: 90px; text-align:right;">
         <div style="float:right; margin-top: 35px;">
-            Twój koszyk
+            @Ajax.ActionLink("Twój koszyk", "MyCart", "Cart", new { category = 1 }, new AjaxOptions() { InsertionMode = InsertionMode.Replace, HttpMethod = "GET", LoadingElementId = "loadingPanel", UpdateTargetId = "dataView" })      
         </div>
     </div>
     <div class="col-md-2" style="margin:auto; height: 90px; text-align:right;">

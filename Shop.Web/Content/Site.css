@@ -66,3 +66,27 @@ hr {
         border-top-left-radius: 15px;
         border-top-right-radius: 15px;
     }
+
+a.closeX {
+    right: 0px;
+    top: 0px;
+    width: 20px;
+    background-color: #FFF;
+    color: black;
+    border-radius: 20px;
+    padding-left: 3px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+a.closeX:hover{
+    text-emphasis:none;
+}
+
+#loadingPanel {
+    position: absolute;
+    left:49.6%;
+    opacity:0.3;
+}
+
+

@@ -11,12 +11,12 @@ namespace Shop.Web.Models
     {
         private List<CartPosition> cartPositions = new List<CartPosition>();
 
-        public void AddItem(CartResource cartResource, int quantity, string media)
+        public void AddItem(Resource cartResource, int quantity, string media)
         {
-            CartPosition cartPosition = cartPositions.Where(x => x.CartResource.IdResource == cartResource.IdResource).FirstOrDefault();
+            CartPosition cartPosition = cartPositions.Where(x => x.Resource.IdResource == cartResource.IdResource && x.Media == media).FirstOrDefault();
             if (cartPosition == null)
             {
-                cartPositions.Add(new CartPosition { CartResource = cartResource, Quantity = quantity, Media = media });
+                cartPositions.Add(new CartPosition { Resource = cartResource, Quantity = quantity, Media = media });
             }
             else
             {
@@ -26,23 +26,21 @@ namespace Shop.Web.Models
 
         public decimal SumValue()
         {
-            return cartPositions.Sum(e => e.CartResource.Price * e.Quantity);
+            return cartPositions.Sum(e => e.Resource.Price * e.Quantity);
+        }
+
+        public IEnumerable<CartPosition> Positions
+        {
+            get { return cartPositions; }
         }
         
     }
 
     public class CartPosition
     {
-        public CartResource CartResource { get; set; }
+        public Resource Resource { get; set; }
         public int Quantity { get; set; }
         public string Media { get; set; }
-    }
-
-    public class CartResource
-    {
-        public int IdResource { get; set; }
-        public string Name { get; set; }
-        public decimal Price { get; set; }
     }
 
 }

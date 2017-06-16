@@ -24,14 +24,32 @@ namespace Shop.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AddToCart([Bind( Include = "Id,Name,MediaType,Quantity")] AddToCartViewModel model)
+        public PartialViewResult AddToCart([Bind( Include = "Id,Name,MediaType,Quantity")] AddToCartViewModel model)
         {
             if (ModelState.IsValid)
             {
-                return RedirectToAction("Index","Resource", 1);
+                Cart cartUser = GetCart();
+                Resource resource = db.Resources.Find(model.Id);
+                if (resource == null)
+                {
+                    return PartialView(model);
+                }
+                cartUser.AddItem(resource, model.Quantity, model.MediaType);
+                return PartialView("DoneAddToCart");
             }
             else
-                return View(model);
+                return PartialView(model);
+        }
+
+        public PartialViewResult MyCart()
+        {
+            Cart cartUser = GetCart();
+            List<MyCartViewModel> myCart = new List<MyCartViewModel>();
+            foreach (var item in cartUser.Positions)
+            {
+                myCart.Add(new MyCartViewModel() { Name = item.Resource.Name, Media = item.Media, Quantity = item.Quantity, Price = item.Resource.Price });
+            }
+            return PartialView(myCart);
         }
 
         private Cart GetCart()
