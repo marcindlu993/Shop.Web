@@ -62,6 +62,28 @@ namespace Shop.Web.Controllers
             return PartialView(resourceViewModel);
         }
 
+        public PartialViewResult SearchResources(string word)
+        {
+            var resourcesList = new List<Resource>();
+            List<Author> auth = db.Authors.Where(x => x.NameAuthor.Contains(word)).ToList();
+            //resourcesList = db.Resources.Where(x => x.Name.Contains(wut) || x.IdAuthor == )).ToList();
+            resourcesList = db.Resources.Include("Author").Where(x => x.Name.Contains(word) || x.Author.NameAuthor.Contains(word)).ToList();
+            string what = word;
+            var resourceViewModel = new List<ResourceViewModel>();
+            foreach (var item in resourcesList)
+            {
+                resourceViewModel.Add(new ResourceViewModel
+                {
+                    IdResource = item.IdResource,
+                    Name = item.Name,
+                    ReleaseDate = item.ReleaseDate,
+                    Price = item.Price,
+                    NameOfAuthor = db.Authors.Where(x => x.IdAuthor == item.IdAuthor).FirstOrDefault().NameAuthor,
+                    PublishingHouseName = db.PublishingHouses.Where(x => x.IdPublishingHouse == item.IdPublishingHouse).FirstOrDefault().NamePublishingHouse
+                });
+            }
+            return PartialView("GetResourceData", resourceViewModel);
+        }
         // GET: Resource/Details/5
         public ActionResult Details(int id)
         {

@@ -11,6 +11,9 @@
     @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
 </head>
 <body>
+    <div id="infoBill" style="position:relative; border: solid 2px; background-color:white;">
+        @Html.Partial("InfoBill")
+    </div>
     @Html.Partial("_TopBar")
     <hr>
     <div class="container body-content">
