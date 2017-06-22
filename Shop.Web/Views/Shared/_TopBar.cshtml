@@ -9,10 +9,10 @@
         <div style="float:left; margin-top: 35px;">
             <div style="float:right; margin-right:5px;">Wyszukiwarka</div>
         </div>
-        @using (Ajax.BeginForm("SearchResources", new AjaxOptions()
+        @using (Ajax.BeginForm("SearchGetResourcesData", new AjaxOptions()
         {
             InsertionMode = InsertionMode.Replace,
-            HttpMethod = "GET",
+            HttpMethod = "POST",
             LoadingElementId = "loadingPanel",
             UpdateTargetId = "dataView"
         }))
@@ -20,11 +20,8 @@
         <div style="margin-top: 30px; text-align:left; float:left;">
             <div class="right-inner-addon">
                 <i class="glyphicon glyphicon-search"></i>
-                @*<input name="wut" id="wut" type="search" class="form-control" style="text-align:right;" />*@
                 @Html.TextBox("word", "", new { @class = "form-control", style =" text-align:right;"})
-                @Html.Hidden("category")
             </div>
-            @*<p>Wyszukiwarka <input class="sr-only" value="Szukaj" /><button class="btn btn-default">Szukaj</button></p>*@
         </div>
         <div style="float:left; margin-top: 30px; margin-left:5px;  ">
             <div style="float:right;"><input type="submit" class="btn btn-default" value="Szukaj" /></div>

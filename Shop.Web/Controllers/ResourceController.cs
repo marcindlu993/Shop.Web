@@ -19,7 +19,6 @@ namespace Shop.Web.Controllers
         public PartialViewResult GetResourceData(int? category = null)
         {
             IEnumerable<Resource> resourceslist = new List<Resource>();
-
             if (category == 3) //pobranie nowości
             {
                 DateTime date = DateTime.Now.AddDays(-14);
@@ -62,13 +61,16 @@ namespace Shop.Web.Controllers
             return PartialView(resourceViewModel);
         }
 
-        public PartialViewResult SearchResources(string word)
+        public PartialViewResult SearchGetResourcesData(string word)//, int category)
         {
             var resourcesList = new List<Resource>();
-            List<Author> auth = db.Authors.Where(x => x.NameAuthor.Contains(word)).ToList();
-            //resourcesList = db.Resources.Where(x => x.Name.Contains(wut) || x.IdAuthor == )).ToList();
-            resourcesList = db.Resources.Include("Author").Where(x => x.Name.Contains(word) || x.Author.NameAuthor.Contains(word)).ToList();
-            string what = word;
+            resourcesList = db.Resources.Include("Author").Where(x => x.Name.Contains(word) || x.Author.NameAuthor.Contains(word)).OrderBy(x => x.Name).ToList();// && x.IdTypeResource == category).ToList();
+            if (resourcesList.Count == 0 || word == "")
+            { 
+                ViewBag.AllertNotFound = "W bazie danych nei odnaleziono produktów spełniających podane kryteria szukania";
+                //resourcesList = db.Resources.OrderBy(x => x.Name).ToList();
+                return PartialView("GetResourceData");
+            }
             var resourceViewModel = new List<ResourceViewModel>();
             foreach (var item in resourcesList)
             {

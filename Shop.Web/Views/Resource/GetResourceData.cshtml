@@ -1,6 +1,16 @@
 ﻿@model IEnumerable<Shop.Web.Models.ResourceViewModel>
-@ViewBag.Empty
-<table class="table table-bordered table-striped">
+@*@{
+    var messageNotFound = ViewBag.AllertNotFound ?? string.Empty;
+    ViewBag.AllertNotFound = null;
+}
+
+<script type="text/javascript">
+        var message = '@messageNotFound';
+        //if (message)
+            alert(message);
+        message = null;
+</script>*@
+<table class="table table-bordered table-striped" onload="AlertDo()">
     <tr class="active">
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -45,10 +55,6 @@
                         HttpMethod = "GET",
                         LoadingElementId = "loadingPanel",
                         UpdateTargetId = "dataViewAddToCart" })
-                @*@Html.ActionLink("do koszyka", "AddToCart", new { id = item.IdResource })*@
-                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
             </td>
         </tr>
     }
