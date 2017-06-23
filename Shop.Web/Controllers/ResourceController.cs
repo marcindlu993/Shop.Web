@@ -18,6 +18,7 @@ namespace Shop.Web.Controllers
 
         public PartialViewResult GetResourceData(int? category = null)
         {
+            Session["Category"] = category;
             IEnumerable<Resource> resourceslist = new List<Resource>();
             if (category == 3) //pobranie nowości
             {
@@ -63,16 +64,42 @@ namespace Shop.Web.Controllers
 
         public PartialViewResult SearchGetResourcesData(string word)//, int category)
         {
-            var resourcesList = new List<Resource>();
-            resourcesList = db.Resources.Include("Author").Where(x => x.Name.Contains(word) || x.Author.NameAuthor.Contains(word)).OrderBy(x => x.Name).ToList();// && x.IdTypeResource == category).ToList();
-            if (resourcesList.Count == 0 || word == "")
+            int? category = (int?)Session["Category"];
+            var resourceslist = new List<Resource>();
+
+            if (category == 3) //pobranie nowości
+            {
+                DateTime date = DateTime.Now.AddDays(-14);
+                DateTime nowTime = DateTime.Now;
+                resourceslist = db.Resources.Include("Author").Where(x => x.ReleaseDate > date && x.ReleaseDate < nowTime && x.Name.Contains(word) || x.Author.NameAuthor.Contains(word)).OrderBy(x => x.Name).ToList();
+            }
+            else if (category == 4) //pobranie zapowiedzi
+            {
+                DateTime date = DateTime.Now.AddDays(14);
+                DateTime nowTime = DateTime.Now;
+                resourceslist = db.Resources.Include("Author").Where(x => x.ReleaseDate < date && x.ReleaseDate > nowTime && x.Name.Contains(word) || x.Author.NameAuthor.Contains(word)).OrderBy(x => x.Name).ToList();
+            }
+            else if (category == 5) //pobranie okazji
+            {
+                resourceslist = db.Resources.Include("Author").Where(x => x.SuperBargain == true && x.Name.Contains(word) || x.Author.NameAuthor.Contains(word)).OrderBy(x => x.Name).ToList();
+            }
+            else if (category == null)
+            {
+                resourceslist = db.Resources.Include("Author").Where(x => x.Name.Contains(word) || x.Author.NameAuthor.Contains(word)).OrderBy(x => x.Name).ToList();
+            }
+            else
+            {
+                resourceslist = db.Resources.Include("Author").Where(x => x.IdTypeResource == category && x.Name.Contains(word) || x.Author.NameAuthor.Contains(word)).OrderBy(x => x.Name).ToList();
+            }
+            // && x.IdTypeResource == category).ToList();
+            if (resourceslist.Count == 0 || word == "")
             { 
                 ViewBag.AllertNotFound = "W bazie danych nei odnaleziono produktów spełniających podane kryteria szukania";
                 //resourcesList = db.Resources.OrderBy(x => x.Name).ToList();
                 return PartialView("GetResourceData");
             }
             var resourceViewModel = new List<ResourceViewModel>();
-            foreach (var item in resourcesList)
+            foreach (var item in resourceslist)
             {
                 resourceViewModel.Add(new ResourceViewModel
                 {

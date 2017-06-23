@@ -1,9 +1,7 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-
 <h4>Katalog książek</h4>
-
 <div style="margin: 10px;">
     <nav>
         <ul class="nav nav-tabs nav-justified navMyAjax">
@@ -33,7 +31,7 @@
     <div id="dataViewAddToCart" style="position:absolute; background-color: white; width:auto; left: 34%;"></div>
 
     <div id="dataView">
-
+        @Html.Action("GetResourceData")
     </div>
 </div>
 
